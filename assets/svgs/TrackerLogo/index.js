@@ -2,13 +2,13 @@ export default function TrackerLogo() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1581.000000pt"
-      height="1118.000000pt"
-      viewBox="0 0 1581.000000 1118.000000"
+      width="30"
+      height="37"
+      viewBox="0 0 30 37"
       preserveAspectRatio="xMidYMid meet"
     >
       <g
-        transform="translate(0.000000,1118.000000) scale(0.100000,-0.100000)"
+        transform="translate(0.000000,37) scale(0.100000,-0.100000)"
         fill="#000000"
         stroke="none"
       >
@@ -22,7 +22,7 @@ export default function TrackerLogo() {
       </g>
       <defs>
         <clipPath id="clip0">
-          <rect width="30" height="37" fill="white" />
+          <rect width="30" height="37" fill="black" />
         </clipPath>
       </defs>
     </svg>

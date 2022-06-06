@@ -15,7 +15,7 @@ export default function NavBar({ user }) {
       '(min-width: 62em)'
     ])
 
-  console.log({ isNotMobile, isNotTabletPortrait, isNotTabletLandscape })
+  // console.log({ isNotMobile, isNotTabletPortrait, isNotTabletLandscape })
 
   return (
     <Box as="nav">
@@ -26,7 +26,7 @@ export default function NavBar({ user }) {
           <ResponsiveNavigation user={user} />
         )}
         <Spacer />
-        {!user ? (
+        {user ? (
           <Box p={1}>
             <Button colorScheme="red">Sign Out</Button>
           </Box>

@@ -3,10 +3,11 @@ import {
   Box,
   Heading,
   Text,
-  Button,
   Stack,
   useColorModeValue
 } from '@chakra-ui/react'
+import SignUpModal from './SignUpModal'
+import LogInModal from './LogInModal'
 
 export default function RightSide() {
   const bg = useColorModeValue('gray.800', 'white')
@@ -36,8 +37,8 @@ export default function RightSide() {
         textAlign={{ base: 'initial', sm: 'initial', lg: 'center' }}
         fontSize={{ base: 'sm', lg: 'xl' }}
       >
-        Visualize and keeps track of new projects that are being created and
-        bugs that are related to these projects.
+        Visualize and keeps track of new projects being created and bugs related
+        to these projects.
       </Text>
       <Stack
         direction={{ base: 'column', lg: 'row' }}
@@ -45,12 +46,8 @@ export default function RightSide() {
         mt={3}
         justifyContent="center"
       >
-        <Button bg="brand.300" colorScheme="brand.300" variant="solid">
-          Login
-        </Button>
-        <Button colorScheme="brand.300" textColor="brand.300" variant="outline">
-          Sign Up
-        </Button>
+        <LogInModal />
+        <SignUpModal />
       </Stack>
       <Flex
         justifyContent="center"

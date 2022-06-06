@@ -11,6 +11,7 @@ import {
   useDisclosure,
   useColorModeValue
 } from '@chakra-ui/react'
+import TrackerLogo from '../../assets/svgs/TrackerLogo'
 import { useRef } from 'react'
 
 export default function ResponsiveNavigation({ user }) {
@@ -18,8 +19,9 @@ export default function ResponsiveNavigation({ user }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
-  return !user ? (
+  return user ? (
     <Box p={4}>
+      {/* <TrackerLogo /> */}
       <Button ref={btnRef} colorScheme={bg} onClick={onOpen}>
         Menu
       </Button>
