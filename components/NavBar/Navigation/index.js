@@ -1,5 +1,6 @@
-import { Flex, Box, Center, Heading, Text, Spacer } from '@chakra-ui/react'
-import TrackerLogo from '../../assets/svgs/TrackerLogo'
+import { Flex, Box, Heading, Spacer } from '@chakra-ui/react'
+import MenuList from './MenuList'
+import TrackerLogo from '../../../assets/svgs/TrackerLogo'
 
 export default function Navigation({ user }) {
   return (
@@ -9,11 +10,7 @@ export default function Navigation({ user }) {
         <Heading size="md">Tracker</Heading>
       </Box>
       <Spacer />
-      {user ? (
-        <Center>
-          <Text>Menu List</Text>
-        </Center>
-      ) : null}
+      {user ? <MenuList /> : null}
     </Flex>
   )
 }

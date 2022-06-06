@@ -1,17 +1,13 @@
 import {
   Box,
-  Divider,
   Button,
   Drawer,
-  DrawerBody,
-  DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   useColorModeValue
 } from '@chakra-ui/react'
-import TrackerLogo from '../../assets/svgs/TrackerLogo'
+import TrackerLogo from '../../../assets/svgs/TrackerLogo'
+import DrawerContents from './DrawerContents'
 import { useRef } from 'react'
 
 export default function ResponsiveNavigation({ user }) {
@@ -33,17 +29,7 @@ export default function ResponsiveNavigation({ user }) {
         size="lg"
       >
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerBody>
-            <DrawerHeader>Menu Item...</DrawerHeader>
-            <Divider />
-            <DrawerHeader>Menu Item...</DrawerHeader>
-            <Divider />
-            <DrawerHeader>Menu Item...</DrawerHeader>
-            <Divider />
-          </DrawerBody>
-        </DrawerContent>
+        <DrawerContents />
       </Drawer>
     </Box>
   ) : null

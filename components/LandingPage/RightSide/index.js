@@ -6,8 +6,8 @@ import {
   Stack,
   useColorModeValue
 } from '@chakra-ui/react'
-import SignUpModal from './SignUpModal'
-import LogInModal from './LogInModal'
+import SignUpModal from './SignUp'
+import LogInModal from './LogIn'
 
 export default function RightSide() {
   const bg = useColorModeValue('gray.800', 'white')

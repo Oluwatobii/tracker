@@ -1,4 +1,5 @@
-import { Image, Square, useColorModeValue } from '@chakra-ui/react'
+import { Square } from '@chakra-ui/react'
+import LandPagePicture from './LandPagePicture'
 
 export default function LeftSide() {
   return (
@@ -14,12 +15,7 @@ export default function LeftSide() {
       ml={{ base: '21', sm: '21', md: '36', lg: '230', xl: '0' }}
       alignItems="center"
     >
-      <Image
-        height="auto"
-        width="90%"
-        src="landingpage.png"
-        alt="Landing Page Art"
-      />
+      <LandPagePicture />
     </Square>
   )
 }
