@@ -10,7 +10,7 @@ export default function Navigation({ user }) {
         <Heading size="md">Tracker</Heading>
       </Box>
       <Spacer />
-      {user ? <MenuList /> : null}
+      {'id' in user ? <MenuList /> : null}
     </Flex>
   )
 }

@@ -2,15 +2,16 @@ import '../styles/globals.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../theme'
 import Navbar from '../components/NavBar'
-import { useState } from 'react'
+import { AuthProvider } from '../context/AuthProvider'
 
 function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState(null)
   return (
-    <ChakraProvider theme={theme}>
-      <Navbar user={user} />
-      <Component {...pageProps} user={user} />
-    </ChakraProvider>
+    <AuthProvider>
+      <ChakraProvider theme={theme}>
+        <Navbar />
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </AuthProvider>
   )
 }
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'https://dev-backend.tbello.dev'
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL
 })

@@ -4,9 +4,12 @@ import { IconButton } from '@chakra-ui/button'
 import { Flex, Box, Button, Spacer, useMediaQuery } from '@chakra-ui/react'
 import Navigation from './Navigation'
 import ResponsiveNavigation from './ResponsiveNavigation'
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthProvider'
 
-export default function NavBar({ user }) {
+export default function NavBar() {
   const { colorMode, toggleColorMode } = useColorMode()
+  const { user } = useContext(AuthContext)
 
   const [isNotMobile, isNotTabletPortrait, isNotTabletLandscape] =
     useMediaQuery([
@@ -15,7 +18,7 @@ export default function NavBar({ user }) {
       '(min-width: 62em)'
     ])
 
-  // console.log({ isNotMobile, isNotTabletPortrait, isNotTabletLandscape })
+  /* console.log({ isNotMobile, isNotTabletPortrait, isNotTabletLandscape }) */
 
   return (
     <Box as="nav">
@@ -26,7 +29,7 @@ export default function NavBar({ user }) {
           <ResponsiveNavigation user={user} />
         )}
         <Spacer />
-        {user ? (
+        {'id' in user ? (
           <Box p={1}>
             <Button colorScheme="red">Sign Out</Button>
           </Box>

@@ -23,7 +23,9 @@ import {
   CloseIcon,
   InfoIcon
 } from '@chakra-ui/icons'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useContext, useRef } from 'react'
+import Cookies from 'js-cookie'
+import jwt_decode from 'jwt-decode'
 import { useForm } from 'react-hook-form'
 import {
   NAME_REGEX,
@@ -31,10 +33,13 @@ import {
   PASSWORD_REGEX
 } from '../../../../utils/regex.js'
 import axios from '../../../../utils/axios.js'
+import AuthContext from '../../../../context/AuthProvider.js'
 
 const REGISTER_URL = '/api/auth/register'
 
 export default function SignUpForm() {
+  const { setUser } = useContext(AuthContext)
+
   const errRef = useRef()
 
   const [showPassword, setShowPassword] = useState(false)
@@ -62,20 +67,26 @@ export default function SignUpForm() {
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({ firstName, lastName, email, password }),
+        { firstName, lastName, email, password },
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         }
       )
 
+      const token = Cookies.get('accessToken')
+      const accessToken = token && token.split(' ')[1]
+      const { user } = jwt_decode(accessToken)
+
       setErrMsg('')
       setSuccess(true)
       reset()
+      setUser(user)
     } catch (error) {
       /* console.error('Registration Error: ', error) */
       setSuccess(false)
-      if (!error.response) setErrMsg(error.message)
+      if (!error.response || !error.response.data || !error.response.data.error)
+        setErrMsg(error.message)
       else setErrMsg(error.response.data.error)
       errRef && errRef.current && errRef.current.focus()
     }

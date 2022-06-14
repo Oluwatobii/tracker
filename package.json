@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev:local": "env-cmd -f .env.local next dev",
+    "build:local": "env-cmd -f .env.local next build",
+    "start:local": "env-cmd -f .env.local next start",
+    "lint:local": "env-cmd -f .env.local next lint",
+    "dev:remote": "env-cmd -f .env.development next dev",
+    "build:remote": "env-cmd -f .env.development next build",
+    "start:remote": "env-cmd -f .env.development next start",
+    "lint:remote": "env-cmd -f .env.development next lint",
+    "dev:production": "env-cmd -f .env.production next dev",
+    "build:production": "env-cmd -f .env.production next build",
+    "start:production": "env-cmd -f .env.production next start",
+    "lint:production": "env-cmd -f .env.production next lint"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.1",
@@ -14,7 +22,10 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "axios": "^0.27.2",
+    "env-cmd": "^10.1.0",
     "framer-motion": "^6.3.4",
+    "js-cookie": "^3.0.1",
+    "jwt-decode": "^3.1.2",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",

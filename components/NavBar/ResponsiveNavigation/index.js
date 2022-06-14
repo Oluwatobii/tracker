@@ -15,7 +15,7 @@ export default function ResponsiveNavigation({ user }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = useRef()
 
-  return user ? (
+  return 'id' in user ? (
     <Box p={4}>
       {/* <TrackerLogo /> */}
       <Button ref={btnRef} colorScheme={bg} onClick={onOpen}>

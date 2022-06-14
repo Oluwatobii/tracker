@@ -6,6 +6,11 @@
 /.pnp
 .pnp.js
 
+#env
+.env.development
+.env.production
+.env.local
+
 # cofnig environment json files
 config.js
 
