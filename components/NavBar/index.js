@@ -1,7 +1,8 @@
 import { useColorMode } from '@chakra-ui/color-mode'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { IconButton } from '@chakra-ui/button'
-import { Flex, Box, Button, Spacer, useMediaQuery } from '@chakra-ui/react'
+import { Flex, Box, Spacer, useMediaQuery } from '@chakra-ui/react'
+import SignOutButton from './SignOutButton'
 import Navigation from './Navigation'
 import ResponsiveNavigation from './ResponsiveNavigation'
 import { useContext } from 'react'
@@ -31,7 +32,7 @@ export default function NavBar() {
         <Spacer />
         {'id' in user ? (
           <Box p={1}>
-            <Button colorScheme="red">Sign Out</Button>
+            <SignOutButton />
           </Box>
         ) : null}
         <Box gap="2" p={3}>
