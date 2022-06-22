@@ -23,7 +23,7 @@ import {
   CloseIcon,
   InfoIcon
 } from '@chakra-ui/icons'
-import { useState, useContext, useRef } from 'react'
+import { useState, useRef } from 'react'
 import Cookies from 'js-cookie'
 import jwt_decode from 'jwt-decode'
 import { useForm } from 'react-hook-form'
@@ -33,12 +33,12 @@ import {
   PASSWORD_REGEX
 } from '../../../../utils/regex.js'
 import axios from '../../../../utils/axios.js'
-import AuthContext from '../../../../context/AuthProvider.js'
+import useAuth from '../../../../hooks/useAuth.js'
 
 const REGISTER_URL = '/api/auth/register'
 
 export default function SignUpForm() {
-  const { setUser } = useContext(AuthContext)
+  const { setUser } = useAuth()
 
   const errRef = useRef()
 
@@ -82,9 +82,12 @@ export default function SignUpForm() {
       setSuccess(true)
       reset()
       setUser(user)
+      localStorage.setItem('user', JSON.stringify(user))
     } catch (error) {
       /* console.error('Registration Error: ', error) */
       setSuccess(false)
+      localStorage.removeItem('user')
+      setUser({})
       if (!error.response || !error.response.data || !error.response.data.error)
         setErrMsg(error.message)
       else setErrMsg(error.response.data.error)

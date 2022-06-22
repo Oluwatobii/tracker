@@ -15,7 +15,6 @@ export default function LandingPage() {
         lg: 'column',
         xl: 'row'
       }}
-      justifyContent="space-between"
       p={{ base: '90px', lg: '100px' }}
       margin={{ base: '-40px', lg: '45px' }}
     >

@@ -14,17 +14,17 @@ import {
   Stack,
   useColorModeValue
 } from '@chakra-ui/react'
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef } from 'react'
 import Cookies from 'js-cookie'
 import jwt_decode from 'jwt-decode'
 import { useForm } from 'react-hook-form'
 import axios from '../../../../utils/axios.js'
-import AuthContext from '../../../../context/AuthProvider.js'
+import useAuth from '../../../../hooks/useAuth.js'
 
 const LOGIN_URL = '/api/auth/login'
 
 export default function LogInForm() {
-  const { setUser } = useContext(AuthContext)
+  const { setUser } = useAuth()
   const errRef = useRef()
   const [errMsg, setErrMsg] = useState('')
   const [success, setSuccess] = useState(false)
@@ -55,9 +55,13 @@ export default function LogInForm() {
       setSuccess(true)
       reset()
       setUser(user)
+      localStorage.setItem('user', JSON.stringify(user))
     } catch (error) {
       /* console.error('Log in Error: ', error) */
+      console.log('loginform: i am error here')
       setSuccess(false)
+      localStorage.removeItem('user')
+      setUser({})
       if (!error.response || !error.response.data || !error.response.data.error)
         setErrMsg(error.message)
       else setErrMsg(error.response.data.error)

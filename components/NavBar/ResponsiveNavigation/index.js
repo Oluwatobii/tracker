@@ -1,12 +1,11 @@
 import {
-  Box,
+  HStack,
   Button,
   Drawer,
   DrawerOverlay,
   useDisclosure,
   useColorModeValue
 } from '@chakra-ui/react'
-import TrackerLogo from '../../../assets/svgs/TrackerLogo'
 import DrawerContents from './DrawerContents'
 import { useRef } from 'react'
 
@@ -16,8 +15,7 @@ export default function ResponsiveNavigation({ user }) {
   const btnRef = useRef()
 
   return 'id' in user ? (
-    <Box p={4}>
-      {/* <TrackerLogo /> */}
+    <HStack p={4}>
       <Button ref={btnRef} colorScheme={bg} onClick={onOpen}>
         Menu
       </Button>
@@ -31,6 +29,6 @@ export default function ResponsiveNavigation({ user }) {
         <DrawerOverlay />
         <DrawerContents />
       </Drawer>
-    </Box>
+    </HStack>
   ) : null
 }
