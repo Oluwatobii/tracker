@@ -4,10 +4,12 @@ import {
   Heading,
   Text,
   Stack,
-  useColorModeValue
+  useColorModeValue,
+  HStack
 } from '@chakra-ui/react'
 import SignUpModal from './SignUp'
 import LogInModal from './LogIn'
+import OtbiLogo from '../../../assets/svgs/OtbiLogo'
 
 export default function RightSide() {
   const bg = useColorModeValue('gray.800', 'white')
@@ -57,11 +59,14 @@ export default function RightSide() {
         p={{ base: '3', lg: '6' }}
         rounded="md"
       >
-        <Text fontSize={{ base: 'xs', lg: 'xl' }}>Powered by</Text>
-        <Text fontSize={{ base: 'xs', lg: 'xl' }} color="brand.300">
-          {' '}
-          Otbi Development{' '}
-        </Text>
+        <HStack>
+          <Text fontSize={{ base: 'xs', lg: 'xl' }}>Powered by</Text>
+          <Text fontSize={{ base: 'xs', lg: 'xl' }} color="brand.300">
+            {' '}
+            Otbi Development{' '}
+          </Text>
+          <OtbiLogo width="21.000000pt" height="20.000000pt" />
+        </HStack>
       </Flex>
     </Box>
   )
