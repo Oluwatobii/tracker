@@ -3,9 +3,12 @@ import Profile from './Profile'
 import RecentlyVisited from './RecentlyVisited'
 import GetStarted from './GetStarted'
 import ActivityFeed from './ActivityFeed'
+import useAuth from '../../hooks/useAuth'
+import { greetingMessage } from '../../utils/helpers'
 
 export default function HomePage() {
   const [isTabletSize] = useMediaQuery(['(min-width: 62em)'])
+  const { user } = useAuth()
 
   return (
     <Stack
@@ -23,9 +26,7 @@ export default function HomePage() {
             base: '-40px'
           }}
         >
-          <Heading>Good Evening, Oluwatobi Bello!</Heading>
-          {/* <Heading>Tracker Doesn't sleep either</Heading> */}
-          {/* <Heading>Hey there, night owl!</Heading> */}
+          <Heading>{greetingMessage({ name: user.userName })}!</Heading>
           <Text>
             {' '}
             Pick up where you left off, catch up with your team's work
