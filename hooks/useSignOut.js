@@ -1,18 +1,19 @@
 import { useContext, useState } from 'react'
 import AuthContext from '../context/AuthProvider'
-import axios from '../utils/axios'
 import Cookies from 'js-cookie'
+import useClient from '../hooks/useClient'
 
 const LOGOUT_URL = '/api/auth/logout'
 
 const useSignOut = () => {
   const [disabled, setDisabled] = useState(false)
   const { setUser } = useContext(AuthContext)
+  const client = useClient()
 
   const handleSignOut = async () => {
     try {
       setDisabled(true)
-      await axios.delete(LOGOUT_URL, {
+      await client.delete(LOGOUT_URL, {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
