@@ -1,6 +1,7 @@
 import { Stack, Heading, Text, Divider, Avatar, HStack } from '@chakra-ui/react'
 
-export default function RecentlyVisited() {
+export default function RecentlyVisited({ workspaces }) {
+  console.log({ recentlyVisited: workspaces })
   return (
     <Stack spacing={{ base: '20px' }} p={{ base: '10px' }}>
       <Heading size={{ base: 'md' }}>Recently Visited workspaces</Heading>

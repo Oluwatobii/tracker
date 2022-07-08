@@ -6,11 +6,15 @@ import {
   Wrap,
   WrapItem,
   Center,
-  HStack
+  HStack,
+  useDisclosure
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
+import CreateWorkspace from '../../Forms/CreateWorkspace'
 
 export default function GetStarted() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <Stack spacing={{ base: '20px' }} p={{ base: '10px' }}>
       <Heading size={{ base: 'md' }}>Get Started with Tracker</Heading>
@@ -33,13 +37,18 @@ export default function GetStarted() {
                   projects.
                 </Text>
                 <HStack
-                  onClick={() => console.log('create workspace')}
+                  onClick={onOpen}
                   style={{ cursor: 'pointer' }}
                   color={'brand.200'}
                 >
                   <Text fontSize={{ base: 'xs' }}>Create Workspace</Text>
                   <ArrowForwardIcon />
                 </HStack>
+                <CreateWorkspace
+                  isOpen={isOpen}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                />
               </Stack>
             </Box>
           </Center>

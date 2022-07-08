@@ -12,8 +12,13 @@ import {
   Flex
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
+import useAuth from '../../../hooks/useAuth'
 
-export default function Profile() {
+export default function Profile({ workspaces }) {
+  const { user } = useAuth()
+
+  console.log({ profile: workspaces })
+
   return (
     <Box
       padding={{ base: '45px', l: '0px' }}
@@ -34,16 +39,16 @@ export default function Profile() {
         >
           <Stack mt={{ base: '35px' }} p={{ base: '3px' }}>
             <Heading mt={{ base: '10px' }} size={{ base: 'sm' }}>
-              Oluwatobi Bello
+              {user.userName}
             </Heading>
             <HStack mt={{ base: '1.5rem !important' }}>
               <AvatarGroup size={{ base: 'md' }} max={2}>
-                <Avatar name="Workspace One " />
-                <Avatar name="Workspace Two " />
+                <Avatar name="Workspace One" />
+                <Avatar name="Workspace Two" />
               </AvatarGroup>
               <Button
                 leftIcon={<EmailIcon />}
-                colorScheme="teal"
+                colorScheme="brand"
                 variant="solid"
               >
                 Invite
