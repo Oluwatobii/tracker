@@ -13,7 +13,7 @@ const clientRefreshToken = async () => {
     const { user } = jwt_decode(accessToken)
     localStorage.setItem('user', JSON.stringify(user))
   } catch (error) {
-    if (typeof window !== 'undefined') localStorage.removeItem('user')
+    localStorage.removeItem('user')
     /* console.error('Refresh accessToken Error: ', error) */
   }
 }

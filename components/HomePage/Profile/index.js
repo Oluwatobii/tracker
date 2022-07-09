@@ -9,15 +9,27 @@ import {
   Avatar,
   HStack,
   Spacer,
-  Flex
+  Flex,
+  Spinner,
+  useDisclosure
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
+import Cookies from 'js-cookie'
 import useAuth from '../../../hooks/useAuth'
+import CreateWorkspace from '../../Forms/CreateWorkspace'
 
-export default function Profile({ workspaces }) {
+export default function Profile({ workspaces, isLoading }) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const { user } = useAuth()
 
-  console.log({ profile: workspaces })
+  const roles = Cookies.get('userRoles')
+  const { workspaces: userWorkspacesRole } = roles ? JSON.parse(roles) : {}
+  const AUTHORIZED_ROLES = ['Admin', 'Owner', 'Workspace Admin']
+  const authorized = workspaces.length
+    ? Object.values(userWorkspacesRole || {}).some(role =>
+        AUTHORIZED_ROLES.includes(role)
+      )
+    : false
 
   return (
     <Box
@@ -41,19 +53,49 @@ export default function Profile({ workspaces }) {
             <Heading mt={{ base: '10px' }} size={{ base: 'sm' }}>
               {user.userName}
             </Heading>
-            <HStack mt={{ base: '1.5rem !important' }}>
-              <AvatarGroup size={{ base: 'md' }} max={2}>
-                <Avatar name="Workspace One" />
-                <Avatar name="Workspace Two" />
-              </AvatarGroup>
-              <Button
-                leftIcon={<EmailIcon />}
-                colorScheme="brand"
-                variant="solid"
-              >
-                Invite
-              </Button>
-            </HStack>
+            {isLoading ? (
+              <Center>
+                <Spinner color={'brand.200'} size={{ base: 'md' }} />
+              </Center>
+            ) : workspaces.length ? (
+              <HStack mt={{ base: '1.5rem !important' }}>
+                <AvatarGroup size={{ base: 'md' }} max={2}>
+                  {workspaces.map(workspace => (
+                    <Avatar key={workspace.uuid} name={workspace.name} />
+                  ))}
+                </AvatarGroup>
+                {authorized ? (
+                  <Button
+                    leftIcon={<EmailIcon />}
+                    colorScheme="brand"
+                    variant="solid"
+                  >
+                    Invite
+                  </Button>
+                ) : null}
+              </HStack>
+            ) : (
+              <>
+                <HStack>
+                  <Text as="i" fontSize={{ base: 'xs' }} color="grey">
+                    No workspace?
+                  </Text>
+                  <Text
+                    onClick={onOpen}
+                    style={{ cursor: 'pointer' }}
+                    fontSize={{ base: 'xs' }}
+                    color={'brand.200'}
+                  >
+                    Create
+                  </Text>
+                </HStack>
+                <CreateWorkspace
+                  isOpen={isOpen}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                />
+              </>
+            )}
             <Box p={{ base: '3px' }}>
               <HStack
                 onClick={() => console.log('workspaces')}
