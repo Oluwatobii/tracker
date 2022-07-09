@@ -1,12 +1,13 @@
-import { useContext, useState } from 'react'
-import AuthContext from '../context/AuthProvider'
+import { useState } from 'react'
 import useAuth from './useAuth'
 import Cookies from 'js-cookie'
 import { client } from '../utils/axios'
+import { useRouter } from 'next/router'
 
 const LOGOUT_URL = '/api/auth/logout'
 
 const useSignOut = () => {
+  const router = useRouter()
   const [disabled, setDisabled] = useState(false)
   const { setUser } = useAuth()
 
@@ -18,6 +19,7 @@ const useSignOut = () => {
       })
       setUser({})
       localStorage.removeItem('user')
+      router.push('/')
       Cookies.remove('accessToken')
       Cookies.remove('refreshToken')
       setDisabled(false)

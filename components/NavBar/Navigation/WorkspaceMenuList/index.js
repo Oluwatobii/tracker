@@ -11,12 +11,16 @@ import {
   PopoverContent,
   useColorModeValue,
   useDisclosure,
-  HStack
+  HStack,
+  Divider
 } from '@chakra-ui/react'
-import { ChevronRightIcon } from '@chakra-ui/icons'
+import { ChevronRightIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import { useRouter } from 'next/router'
+
 import CreateWorkspace from '../../../Forms/CreateWorkspace'
 
 export default function WorkspaceMenuList() {
+  const router = useRouter()
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -30,7 +34,7 @@ export default function WorkspaceMenuList() {
       minW={'sm'}
       m={'0  !important'}
     >
-      <Stack>
+      <Stack minH={{ base: 'lg' }}>
         <HStack>
           <Input
             htmlSize={20}
@@ -116,6 +120,16 @@ export default function WorkspaceMenuList() {
           </HStack>
         </Link>
       </Stack>
+      <Divider />
+      <HStack
+        onClick={() => router.push('/workspaces')}
+        style={{ cursor: 'pointer' }}
+        color={'brand.200'}
+        mt={{ base: '10px' }}
+      >
+        <Text fontSize={{ base: 'xs' }}>View all Workspaces</Text>
+        <ArrowForwardIcon />
+      </HStack>
     </PopoverContent>
   )
 }

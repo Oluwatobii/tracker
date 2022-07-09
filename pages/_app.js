@@ -10,15 +10,15 @@ const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
           <Navbar />
           <Component {...pageProps} />
-        </ChakraProvider>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-      </QueryClientProvider>
-    </AuthProvider>
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryClientProvider>
+      </AuthProvider>
+    </ChakraProvider>
   )
 }
 

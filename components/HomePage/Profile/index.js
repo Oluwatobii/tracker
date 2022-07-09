@@ -14,11 +14,13 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
+import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import useAuth from '../../../hooks/useAuth'
 import CreateWorkspace from '../../Forms/CreateWorkspace'
 
 export default function Profile({ workspaces, isLoading }) {
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user } = useAuth()
 
@@ -98,7 +100,7 @@ export default function Profile({ workspaces, isLoading }) {
             )}
             <Box p={{ base: '3px' }}>
               <HStack
-                onClick={() => console.log('workspaces')}
+                onClick={() => router.push('/workspaces')}
                 style={{ cursor: 'pointer' }}
                 spacing={{ base: '30px' }}
                 mb={{ base: '10px' }}
@@ -110,7 +112,7 @@ export default function Profile({ workspaces, isLoading }) {
                 </Flex>
               </HStack>
               <HStack
-                onClick={() => console.log('current queue')}
+                onClick={() => router.push('/tickets')}
                 style={{ cursor: 'pointer' }}
                 spacing={{ base: '30px' }}
                 mb={{ base: '10px' }}
@@ -122,7 +124,7 @@ export default function Profile({ workspaces, isLoading }) {
                 </Flex>
               </HStack>
               <HStack
-                onClick={() => console.log('reports')}
+                onClick={() => router.push('/reports')}
                 style={{ cursor: 'pointer' }}
                 spacing={{ base: '30px' }}
                 mb={{ base: '10px' }}

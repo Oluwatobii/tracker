@@ -1,4 +1,5 @@
 import { createContext, useMemo, useState, useEffect } from 'react'
+import LandingPage from '../components/LandingPage'
 
 const AuthContext = createContext({})
 
@@ -14,7 +15,11 @@ export const AuthProvider = ({ children }) => {
     setUser(userFromLocalStorage)
   }, [])
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={value}>
+      {'id' in value.user ? children : <LandingPage />}
+    </AuthContext.Provider>
+  )
 }
 
 export default AuthContext
