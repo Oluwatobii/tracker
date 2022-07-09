@@ -11,11 +11,16 @@ import {
 } from '@chakra-ui/react'
 import { useQuery } from 'react-query'
 import { client } from '../../../utils/axios'
+import useWorkspaces from '../../../hooks/useWorkspaces'
 
 const WORKSPACE_RECENTLY_VISITED_URL =
   '/api/workspace/recentlyVisitedWorkspaces'
 
-export default function RecentlyVisited({ workspaces }) {
+export default function RecentlyVisited() {
+  const { data: workspacesData } = useWorkspaces()
+  const workspaces =
+    workspacesData && workspacesData.data ? workspacesData.data.workspaces : []
+
   const getRecentlyVisitedWorkspaces = async () => {
     return await client.get(WORKSPACE_RECENTLY_VISITED_URL)
   }

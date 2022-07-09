@@ -12,17 +12,35 @@ import {
   useColorModeValue,
   useDisclosure,
   HStack,
-  Divider
+  Divider,
+  Heading
 } from '@chakra-ui/react'
 import { ChevronRightIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
-
+import useGetFetchQuery from '../../../../hooks/useGetFetchQuery'
+import useWorkspaces from '../../../../hooks/useWorkspaces'
 import CreateWorkspace from '../../../Forms/CreateWorkspace'
 
 export default function WorkspaceMenuList() {
-  const router = useRouter()
+  const { data } = useWorkspaces()
+  const recentlyVisitedData = useGetFetchQuery('recentlyVisitedWorkspaces')
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+  const popoverContentHoverColor = useColorModeValue('brand.400', 'gray.900')
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const router = useRouter()
+
+  const workspaces = data && data.data ? data.data.workspaces : []
+  const recentlyVisited =
+    (recentlyVisitedData &&
+      recentlyVisitedData.data &&
+      recentlyVisitedData.data.recentlyVisited) ||
+    []
+  const recentlyVisitedWorkspaces = workspaces.filter(workspace =>
+    recentlyVisited.includes(workspace.uuid)
+  )
+  const moreWorkspaces = workspaces.filter(
+    workspace => !recentlyVisited.includes(workspace.uuid)
+  )
 
   return (
     <PopoverContent
@@ -47,78 +65,146 @@ export default function WorkspaceMenuList() {
           </Button>
           <CreateWorkspace isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
         </HStack>
-        <Link
-          href="#workspace#1"
-          role={'group'}
-          display={'block'}
-          p={2}
-          rounded={'md'}
-          _hover={{ bg: useColorModeValue('brand.400', 'gray.900') }}
-        >
-          <HStack direction={'row'} align={'center'}>
-            <Avatar size="sm" name="Workspace One" />
-            <Box>
-              <Text
-                transition={'all .3s ease'}
-                _groupHover={{ color: 'brand.200' }}
-                fontWeight={700}
-              >
-                Workspace #1
+        <Stack>
+          <Heading as="h5" size="xs" color="grey">
+            {' '}
+            Recently visited
+          </Heading>
+          {recentlyVisitedWorkspaces.length ? (
+            <>
+              {recentlyVisitedWorkspaces.map(workspace => (
+                <Box key={workspace.uuid}>
+                  <Link
+                    href="#workspace#1"
+                    role={'group'}
+                    display={'block'}
+                    p={2}
+                    rounded={'md'}
+                    _hover={{ popoverContentHoverColor }}
+                  >
+                    <HStack direction={'row'} align={'center'}>
+                      <Avatar size="sm" name={workspace.name} />
+                      <Box>
+                        <Text
+                          transition={'all .3s ease'}
+                          _groupHover={{ color: 'brand.200' }}
+                          fontWeight={700}
+                        >
+                          {workspace.name}
+                        </Text>
+                        {workspace.additioonalData &&
+                        workspace.additioonalData.description ? (
+                          <Text fontSize={'md'}>
+                            {workspace.additioonalData.description}
+                          </Text>
+                        ) : (
+                          <Text as="i" fontSize={{ base: 'md' }} color="grey">
+                            No Labels
+                          </Text>
+                        )}
+                      </Box>
+                      <Flex
+                        transition={'all .3s ease'}
+                        transform={'translateX(-10px)'}
+                        opacity={0}
+                        _groupHover={{
+                          opacity: '100%',
+                          transform: 'translateX(0)'
+                        }}
+                        justify={'flex-end'}
+                        align={'center'}
+                        flex={1}
+                      >
+                        <Icon
+                          color={'brand.200'}
+                          w={5}
+                          h={5}
+                          as={ChevronRightIcon}
+                        />
+                      </Flex>
+                    </HStack>
+                  </Link>
+                </Box>
+              ))}
+            </>
+          ) : (
+            <HStack>
+              <Text as="i" fontSize={{ base: 'md' }} color="grey">
+                No recent workspace visited
               </Text>
-              <Text fontSize={'md'}>Workspaces #1 Label</Text>
-            </Box>
-            <Flex
-              transition={'all .3s ease'}
-              transform={'translateX(-10px)'}
-              opacity={0}
-              _groupHover={{
-                opacity: '100%',
-                transform: 'translateX(0)'
-              }}
-              justify={'flex-end'}
-              align={'center'}
-              flex={1}
-            >
-              <Icon color={'brand.200'} w={5} h={5} as={ChevronRightIcon} />
-            </Flex>
-          </HStack>
-        </Link>
-        <Link
-          href="#workspace#2"
-          role={'group'}
-          display={'block'}
-          p={2}
-          rounded={'md'}
-          _hover={{ bg: useColorModeValue('brand.400', 'gray.900') }}
-        >
-          <HStack direction={'row'} align={'center'}>
-            <Avatar size="sm" name="Workspace Two" />
-            <Box>
-              <Text
-                transition={'all .3s ease'}
-                _groupHover={{ color: 'brand.200' }}
-                fontWeight={700}
-              >
-                Workspaces #2
+            </HStack>
+          )}
+        </Stack>
+        <Stack>
+          <Heading as="h5" size="xs" color="grey">
+            {' '}
+            More Workspaces
+          </Heading>
+          {moreWorkspaces.length ? (
+            <>
+              {moreWorkspaces.map(workspace => (
+                <Box key={workspace.uuid}>
+                  <Link
+                    href="#workspace#1"
+                    role={'group'}
+                    display={'block'}
+                    p={2}
+                    rounded={'md'}
+                    _hover={{ popoverContentHoverColor }}
+                  >
+                    <HStack direction={'row'} align={'center'}>
+                      <Avatar size="sm" name={workspace.name} />
+                      <Box>
+                        <Text
+                          transition={'all .3s ease'}
+                          _groupHover={{ color: 'brand.200' }}
+                          fontWeight={700}
+                        >
+                          {workspace.name}
+                        </Text>
+                        {workspace.additioonalData &&
+                        workspace.additioonalData.description ? (
+                          <Text fontSize={'md'}>
+                            {workspace.additioonalData.description}
+                          </Text>
+                        ) : (
+                          <Text as="i" fontSize={{ base: 'md' }} color="grey">
+                            No Labels
+                          </Text>
+                        )}
+                      </Box>
+                      <Flex
+                        transition={'all .3s ease'}
+                        transform={'translateX(-10px)'}
+                        opacity={0}
+                        _groupHover={{
+                          opacity: '100%',
+                          transform: 'translateX(0)'
+                        }}
+                        justify={'flex-end'}
+                        align={'center'}
+                        flex={1}
+                      >
+                        <Icon
+                          color={'brand.200'}
+                          w={5}
+                          h={5}
+                          as={ChevronRightIcon}
+                        />
+                      </Flex>
+                    </HStack>
+                  </Link>
+                </Box>
+              ))}
+            </>
+          ) : (
+            <HStack>
+              <Text as="i" fontSize={{ base: 'md' }} color="grey">
+                No more workspaces
               </Text>
-              <Text fontSize={'md'}>Workspace #2 Label</Text>
-            </Box>
-            <Flex
-              transition={'all .3s ease'}
-              transform={'translateX(-10px)'}
-              opacity={0}
-              _groupHover={{
-                opacity: '100%',
-                transform: 'translateX(0)'
-              }}
-              justify={'flex-end'}
-              align={'center'}
-              flex={1}
-            >
-              <Icon color={'brand.200'} w={5} h={5} as={ChevronRightIcon} />
-            </Flex>
-          </HStack>
-        </Link>
+            </HStack>
+          )}
+        </Stack>
       </Stack>
       <Divider />
       <HStack

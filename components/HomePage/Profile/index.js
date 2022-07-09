@@ -18,12 +18,14 @@ import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import useAuth from '../../../hooks/useAuth'
 import CreateWorkspace from '../../Forms/CreateWorkspace'
+import useWorkspaces from '../../../hooks/useWorkspaces'
 
-export default function Profile({ workspaces, isLoading }) {
+export default function Profile() {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user } = useAuth()
-
+  const { data, isLoading } = useWorkspaces()
+  const workspaces = data && data.data ? data.data.workspaces : []
   const roles = Cookies.get('userRoles')
   const { workspaces: userWorkspacesRole } = roles ? JSON.parse(roles) : {}
   const AUTHORIZED_ROLES = ['Admin', 'Owner', 'Workspace Admin']
