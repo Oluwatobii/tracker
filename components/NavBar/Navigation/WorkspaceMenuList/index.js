@@ -94,12 +94,12 @@ export default function WorkspaceMenuList() {
                         </Text>
                         {workspace.additioonalData &&
                         workspace.additioonalData.description ? (
-                          <Text fontSize={'md'}>
+                          <Text fontSize={'md'} noOfLines={1}>
                             {workspace.additioonalData.description}
                           </Text>
                         ) : (
-                          <Text as="i" fontSize={{ base: 'md' }} color="grey">
-                            No Labels
+                          <Text as="i" fontSize={{ base: 'sm' }} color="grey">
+                            No description
                           </Text>
                         )}
                       </Box>
@@ -164,12 +164,12 @@ export default function WorkspaceMenuList() {
                         </Text>
                         {workspace.additioonalData &&
                         workspace.additioonalData.description ? (
-                          <Text fontSize={'md'}>
+                          <Text fontSize={'md'} noOfLines={1}>
                             {workspace.additioonalData.description}
                           </Text>
                         ) : (
-                          <Text as="i" fontSize={{ base: 'md' }} color="grey">
-                            No Labels
+                          <Text as="i" fontSize={{ base: 'sm' }} color="grey">
+                            No description
                           </Text>
                         )}
                       </Box>

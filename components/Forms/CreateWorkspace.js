@@ -67,11 +67,11 @@ export default function CreateWorkspace({ isOpen, onOpen, onClose }) {
                   onChange={e => setDescription(e.target.value)}
                 />
               </FormControl>
-              <ModalFooter gap={8} direction={{ base: 'column', lg: 'row' }}>
+              <ModalFooter gap={4} direction={{ base: 'column', lg: 'row' }}>
                 <Button
                   bg={'blue.400'}
                   color={'white'}
-                  w={{ base: '430px', lg: '530px' }}
+                  w={{ base: '430px', md: '450px', lg: '530px' }}
                   _hover={{
                     bg: 'blue.500'
                   }}
@@ -82,7 +82,7 @@ export default function CreateWorkspace({ isOpen, onOpen, onClose }) {
                 <Button
                   onClick={onClose}
                   bg={'red.400'}
-                  w={{ base: '230px' }}
+                  w={{ base: '330px', md: '350px', lg: '400px' }}
                   _hover={{
                     bg: 'red.500'
                   }}
