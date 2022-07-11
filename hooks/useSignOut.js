@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useQueryClient } from 'react-query'
 import useAuth from './useAuth'
 import Cookies from 'js-cookie'
 import { client } from '../utils/axios'
@@ -7,6 +8,7 @@ import { useRouter } from 'next/router'
 const LOGOUT_URL = '/api/auth/logout'
 
 const useSignOut = () => {
+  const queryClient = useQueryClient()
   const router = useRouter()
   const [disabled, setDisabled] = useState(false)
   const { setUser } = useAuth()
@@ -14,6 +16,7 @@ const useSignOut = () => {
   const handleSignOut = async () => {
     try {
       setDisabled(true)
+      queryClient.clear()
       await client.delete(LOGOUT_URL, {
         headers: { 'Content-Type': 'application/json' }
       })

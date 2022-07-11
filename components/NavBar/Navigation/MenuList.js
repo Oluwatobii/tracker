@@ -44,7 +44,7 @@ export default function MenuList() {
           <PopoverTrigger m={0}>
             <Link
               p={2}
-              href="/workspaces"
+              href="/workspace"
               fontSize={'md'}
               fontWeight={700}
               color={linkColor}
@@ -63,7 +63,7 @@ export default function MenuList() {
           <PopoverTrigger>
             <Link
               p={2}
-              href="/tickets"
+              href="/ticket"
               fontSize={'md'}
               fontWeight={700}
               color={linkColor}
@@ -80,7 +80,7 @@ export default function MenuList() {
           <PopoverTrigger>
             <Link
               p={2}
-              href="/reports"
+              href="/report"
               fontSize={'md'}
               fontWeight={700}
               color={linkColor}

@@ -18,15 +18,15 @@ export default function DrawerContents() {
       <DrawerBody>
         <DrawerHeader onClick={() => router.push('/')}>Home</DrawerHeader>
         <Divider />
-        <DrawerHeader onClick={() => router.push('/workspaces')}>
+        <DrawerHeader onClick={() => router.push('/workspace')}>
           Workspaces
         </DrawerHeader>
         <Divider />
-        <DrawerHeader onClick={() => router.push('/tickets')}>
+        <DrawerHeader onClick={() => router.push('/ticket')}>
           Current Queue
         </DrawerHeader>
         <Divider />
-        <DrawerHeader onClick={() => router.push('/reports')}>
+        <DrawerHeader onClick={() => router.push('/report')}>
           Reports
         </DrawerHeader>
         <Divider />

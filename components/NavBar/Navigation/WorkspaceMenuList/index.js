@@ -73,9 +73,11 @@ export default function WorkspaceMenuList() {
           {recentlyVisitedWorkspaces.length ? (
             <>
               {recentlyVisitedWorkspaces.map(workspace => (
-                <Box key={workspace.uuid}>
+                <Box
+                  key={workspace.uuid}
+                  onClick={() => router.push(`/workspace/${workspace.id}`)}
+                >
                   <Link
-                    href="#workspace#1"
                     role={'group'}
                     display={'block'}
                     p={2}
@@ -143,9 +145,11 @@ export default function WorkspaceMenuList() {
           {moreWorkspaces.length ? (
             <>
               {moreWorkspaces.map(workspace => (
-                <Box key={workspace.uuid}>
+                <Box
+                  key={workspace.uuid}
+                  onClick={() => router.push(`/workspace/${workspace.id}`)}
+                >
                   <Link
-                    href="#workspace#1"
                     role={'group'}
                     display={'block'}
                     p={2}
@@ -208,7 +212,7 @@ export default function WorkspaceMenuList() {
       </Stack>
       <Divider />
       <HStack
-        onClick={() => router.push('/workspaces')}
+        onClick={() => router.push('/workspace')}
         style={{ cursor: 'pointer' }}
         color={'brand.200'}
         mt={{ base: '10px' }}

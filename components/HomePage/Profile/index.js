@@ -102,7 +102,7 @@ export default function Profile() {
             )}
             <Box p={{ base: '3px' }}>
               <HStack
-                onClick={() => router.push('/workspaces')}
+                onClick={() => router.push('/workspace')}
                 style={{ cursor: 'pointer' }}
                 spacing={{ base: '30px' }}
                 mb={{ base: '10px' }}
@@ -114,7 +114,7 @@ export default function Profile() {
                 </Flex>
               </HStack>
               <HStack
-                onClick={() => router.push('/tickets')}
+                onClick={() => router.push('/ticket')}
                 style={{ cursor: 'pointer' }}
                 spacing={{ base: '30px' }}
                 mb={{ base: '10px' }}
@@ -126,7 +126,7 @@ export default function Profile() {
                 </Flex>
               </HStack>
               <HStack
-                onClick={() => router.push('/reports')}
+                onClick={() => router.push('/report')}
                 style={{ cursor: 'pointer' }}
                 spacing={{ base: '30px' }}
                 mb={{ base: '10px' }}
