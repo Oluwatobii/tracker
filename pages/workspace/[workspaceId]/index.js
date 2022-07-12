@@ -12,7 +12,7 @@ export default function Projects() {
         ml="10px"
         colorScheme="purple"
         size={{ base: 'sm', lg: 'md' }}
-        onClick={() => router.push(`/workspaces/${workspaceId}/admin`)}
+        onClick={() => router.push(`/workspace/${workspaceId}/admin`)}
       >
         Admin
       </Button>
