@@ -94,10 +94,10 @@ export default function WorkspaceMenuList() {
                         >
                           {workspace.name}
                         </Text>
-                        {workspace.additioonalData &&
-                        workspace.additioonalData.description ? (
-                          <Text fontSize={'md'} noOfLines={1}>
-                            {workspace.additioonalData.description}
+                        {workspace.additionalData &&
+                        workspace.additionalData.description ? (
+                          <Text as="i" fontSize={'md'} noOfLines={1}>
+                            {workspace.additionalData.description}
                           </Text>
                         ) : (
                           <Text as="i" fontSize={{ base: 'sm' }} color="grey">
@@ -166,10 +166,10 @@ export default function WorkspaceMenuList() {
                         >
                           {workspace.name}
                         </Text>
-                        {workspace.additioonalData &&
-                        workspace.additioonalData.description ? (
-                          <Text fontSize={'md'} noOfLines={1}>
-                            {workspace.additioonalData.description}
+                        {workspace.additionalData &&
+                        workspace.additionalData.description ? (
+                          <Text as="i" fontSize={'md'} noOfLines={1}>
+                            {workspace.additionalData.description}
                           </Text>
                         ) : (
                           <Text as="i" fontSize={{ base: 'sm' }} color="grey">

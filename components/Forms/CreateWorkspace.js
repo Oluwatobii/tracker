@@ -4,6 +4,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Alert,
+  AlertIcon,
   Textarea,
   Stack,
   FormHelperText,
@@ -17,13 +19,18 @@ import {
   useColorModeValue
 } from '@chakra-ui/react'
 import { useState } from 'react'
+import { useAddWorkspaces } from '../../hooks/useWorkspaces'
 
 export default function CreateWorkspace({ isOpen, onOpen, onClose }) {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
 
+  const { mutate: addWorkspace, isError, error } = useAddWorkspaces({ onClose })
   const handleCreateWorkspace = () => {
-    console.log({ name, description })
+    const workspace = { name, description }
+    addWorkspace(workspace)
+    setName('')
+    setDescription('')
   }
 
   return (
@@ -46,20 +53,19 @@ export default function CreateWorkspace({ isOpen, onOpen, onClose }) {
               p={6}
             >
               <FormControl id="name" isRequired>
-                <FormLabel>Name</FormLabel>
+                <FormLabel htmlFor="name">Name</FormLabel>
                 <Input
                   onChange={e => setName(e.target.value)}
                   value={name}
                   type="text"
                 />
               </FormControl>
-              <FormControl>
+              <FormControl id="description">
                 <FormLabel htmlFor="description">Description</FormLabel>
                 <FormHelperText mb={2}>
                   Add a brief description about this workspace.
                 </FormHelperText>
                 <Textarea
-                  id="description"
                   type="text"
                   value={description}
                   size="sm"
@@ -67,6 +73,18 @@ export default function CreateWorkspace({ isOpen, onOpen, onClose }) {
                   onChange={e => setDescription(e.target.value)}
                 />
               </FormControl>
+              {isError && error ? (
+                <Stack direction="row" justifyContent="center">
+                  <Alert status="error">
+                    <AlertIcon />
+                    {(error &&
+                      error.response &&
+                      error.response.data &&
+                      error.response.data.error) ||
+                      error.message}
+                  </Alert>
+                </Stack>
+              ) : null}
               <ModalFooter gap={4} direction={{ base: 'column', lg: 'row' }}>
                 <Button
                   bg={'blue.400'}

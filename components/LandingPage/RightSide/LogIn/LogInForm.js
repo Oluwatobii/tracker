@@ -58,7 +58,6 @@ export default function LogInForm() {
       localStorage.setItem('user', JSON.stringify(user))
     } catch (error) {
       /* console.error('Log in Error: ', error) */
-      console.log('loginform: i am error here')
       setSuccess(false)
       localStorage.removeItem('user')
       setUser({})

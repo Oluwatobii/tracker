@@ -104,10 +104,10 @@ export default function Workspaces() {
                         <Heading as="h3" size="lg">
                           {workspace.name}
                         </Heading>
-                        {workspace.additioonalData &&
-                        workspace.additioonalData.description ? (
+                        {workspace.additionalData &&
+                        workspace.additionalData.description ? (
                           <Text fontSize={'md'} noOfLines={1}>
-                            {workspace.additioonalData.description}
+                            {workspace.additionalData.description}
                           </Text>
                         ) : (
                           <Text
