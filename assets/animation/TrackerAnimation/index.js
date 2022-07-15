@@ -5,15 +5,19 @@ import animationData from './tracker-animation.json'
 
 export default function TrackerAnimation() {
   const container = useRef(null)
+  const shouldRender = useRef(true)
 
   useEffect(() => {
-    lottie.loadAnimation({
-      container: container.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData
-    })
+    if (shouldRender.current) {
+      shouldRender.current = false
+      lottie.loadAnimation({
+        container: container.current,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData
+      })
+    }
   }, [])
   return (
     <Flex>
