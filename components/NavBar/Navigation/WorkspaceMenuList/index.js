@@ -20,6 +20,7 @@ import { useRouter } from 'next/router'
 import useGetFetchQuery from '../../../../hooks/useGetFetchQuery'
 import useWorkspaces from '../../../../hooks/useWorkspaces'
 import CreateWorkspace from '../../../Forms/CreateWorkspace'
+import useGoToWorkspace from '../../../../hooks/useGoToWorkspace'
 
 export default function WorkspaceMenuList() {
   const { data } = useWorkspaces()
@@ -28,6 +29,7 @@ export default function WorkspaceMenuList() {
   const popoverContentHoverColor = useColorModeValue('brand.400', 'gray.900')
   const { isOpen, onOpen, onClose } = useDisclosure()
   const router = useRouter()
+  const { handleGoToWorkspace } = useGoToWorkspace()
 
   const workspaces = data && data.data ? data.data.workspaces : []
   const recentlyVisited =
@@ -75,7 +77,12 @@ export default function WorkspaceMenuList() {
               {recentlyVisitedWorkspaces.map(workspace => (
                 <Box
                   key={workspace.uuid}
-                  onClick={() => router.push(`/workspace/${workspace.id}`)}
+                  onClick={() =>
+                    handleGoToWorkspace({
+                      id: workspace.id,
+                      uuid: workspace.uuid
+                    })
+                  }
                 >
                   <Link
                     role={'group'}
@@ -147,7 +154,12 @@ export default function WorkspaceMenuList() {
               {moreWorkspaces.map(workspace => (
                 <Box
                   key={workspace.uuid}
-                  onClick={() => router.push(`/workspace/${workspace.id}`)}
+                  onClick={() =>
+                    handleGoToWorkspace({
+                      id: workspace.id,
+                      uuid: workspace.uuid
+                    })
+                  }
                 >
                   <Link
                     role={'group'}

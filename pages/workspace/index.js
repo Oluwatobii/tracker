@@ -17,9 +17,11 @@ import {
 import useWorkspaces from '../../hooks/useWorkspaces'
 import CreateWorkspace from '../../components/Forms/CreateWorkspace'
 import { useRouter } from 'next/router'
+import useGoToWorkspace from '../../hooks/useGoToWorkspace'
 
 export default function Workspaces() {
   const router = useRouter()
+  const { handleGoToWorkspace } = useGoToWorkspace()
   const { data } = useWorkspaces()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const workspaces = data && data.data ? data.data.workspaces : []
@@ -98,7 +100,12 @@ export default function Workspaces() {
                     <HStack
                       mb="10px"
                       style={{ cursor: 'pointer' }}
-                      onClick={() => router.push(`/workspace/${workspace.id}`)}
+                      onClick={() =>
+                        handleGoToWorkspace({
+                          id: workspace.id,
+                          uuid: workspace.uuid
+                        })
+                      }
                     >
                       <Box>
                         <Heading as="h3" size="lg">

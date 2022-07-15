@@ -15,12 +15,13 @@ const greetingMessage = ({ name }) => {
 }
 
 const recentlyVisited = ({ workspaces, uuid, limit = 2 }) => {
-  if (workspaces.includes(uuid) && workspaces.length === limit)
-    return workspaces
+  if (workspaces.includes(uuid) && workspaces.length >= limit)
+    return [...new Set(workspaces.slice(0, limit))]
 
   if (workspaces.length === limit) {
     workspaces.pop()
     workspaces.unshift(uuid)
+    return [...new Set(workspaces)]
   }
 
   workspaces.unshift(uuid)

@@ -12,11 +12,13 @@ import {
 import { useQuery } from 'react-query'
 import { client } from '../../../utils/axios'
 import useWorkspaces from '../../../hooks/useWorkspaces'
+import useGoToWorkspace from '../../../hooks/useGoToWorkspace'
 
 const WORKSPACE_RECENTLY_VISITED_URL =
   '/api/workspace/recentlyVisitedWorkspaces'
 
 export default function RecentlyVisited() {
+  const { handleGoToWorkspace } = useGoToWorkspace()
   const { data: workspacesData } = useWorkspaces()
   const workspaces =
     workspacesData && workspacesData.data ? workspacesData.data.workspaces : []
@@ -47,7 +49,12 @@ export default function RecentlyVisited() {
           {filtered.map(workspace => (
             <Box key={workspace.uuid}>
               <HStack
-                onClick={() => console.log('recently visited 1')}
+                onClick={() =>
+                  handleGoToWorkspace({
+                    id: workspace.id,
+                    uuid: workspace.uuid
+                  })
+                }
                 style={{ cursor: 'pointer' }}
               >
                 <Avatar size="sm" name={workspace.name} />

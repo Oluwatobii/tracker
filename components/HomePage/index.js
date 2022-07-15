@@ -6,7 +6,7 @@ import RecentlyVisited from './RecentlyVisited'
 import GetStarted from './GetStarted'
 import ActivityFeed from './ActivityFeed'
 import { greetingMessage } from '../../utils/helpers'
-import useWorkspaces from '../../hooks/useWorkspaces'
+import TrackerAnimation from '../../assets/animation/TrackerAnimation'
 
 export default function HomePage() {
   const [isTabletSize] = useMediaQuery(['(min-width: 62em)'])
@@ -19,7 +19,12 @@ export default function HomePage() {
       spacing={{ base: '24px' }}
       justify={{ base: 'center' }}
     >
-      {isTabletSize ? <Profile /> : null}
+      {isTabletSize ? (
+        <Box>
+          <Profile />
+          <TrackerAnimation />
+        </Box>
+      ) : null}
       <Box padding={{ base: '30px', l: '0px' }} maxW={{ base: '650px' }}>
         <Stack
           spacing={{ base: '20px' }}
