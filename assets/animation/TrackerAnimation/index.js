@@ -5,11 +5,11 @@ import animationData from './tracker-animation.json'
 
 export default function TrackerAnimation() {
   const container = useRef(null)
-  const shouldRender = useRef(true)
+  const rendered = useRef(true)
 
   useEffect(() => {
-    if (shouldRender.current) {
-      shouldRender.current = false
+    if (rendered.current) {
+      rendered.current = false
       lottie.loadAnimation({
         container: container.current,
         renderer: 'svg',
@@ -19,6 +19,7 @@ export default function TrackerAnimation() {
       })
     }
   }, [])
+
   return (
     <Flex>
       <Box as="section" zIndex="1">
