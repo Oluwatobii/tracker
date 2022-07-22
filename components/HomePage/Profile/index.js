@@ -15,12 +15,14 @@ import {
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
+import { useId } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import CreateWorkspace from '../../Forms/CreateWorkspace'
 import useWorkspaces from '../../../hooks/useWorkspaces'
 import useUserRoles from '../../../hooks/useUserRoles'
 
 export default function Profile() {
+  const id = useId()
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user } = useAuth()
@@ -36,6 +38,29 @@ export default function Profile() {
         AUTHORIZED_ROLES.includes(role)
       )
     : false
+
+  const PROFILE_MENU_LIST = [
+    {
+      key: `${id}-workspace`,
+      name: 'Workspaces',
+      url: '/workspace'
+    },
+    {
+      key: `${id}-ticket`,
+      name: 'Current Queue',
+      url: '/ticket'
+    },
+    {
+      key: `${id}-project`,
+      name: 'Projects',
+      url: '/project'
+    },
+    {
+      key: `${id}-report`,
+      name: 'Reports',
+      url: '/report'
+    }
+  ]
 
   return (
     <Box
@@ -103,42 +128,21 @@ export default function Profile() {
               </>
             )}
             <Box p={{ base: '3px' }}>
-              <HStack
-                onClick={() => router.push('/workspace')}
-                style={{ cursor: 'pointer' }}
-                spacing={{ base: '30px' }}
-                mb={{ base: '10px' }}
-              >
-                <Text fontSize={{ base: 'xs' }}>Workspaces</Text>
-                <Spacer />
-                <Flex color={'brand.200'} alignItems={{ base: 'flex-end' }}>
-                  <ChevronRightIcon />
-                </Flex>
-              </HStack>
-              <HStack
-                onClick={() => router.push('/ticket')}
-                style={{ cursor: 'pointer' }}
-                spacing={{ base: '30px' }}
-                mb={{ base: '10px' }}
-              >
-                <Text fontSize={{ base: 'xs' }}>Current Queue</Text>
-                <Spacer />
-                <Flex color={'brand.200'} alignItems={{ base: 'flex-end' }}>
-                  <ChevronRightIcon />
-                </Flex>
-              </HStack>
-              <HStack
-                onClick={() => router.push('/report')}
-                style={{ cursor: 'pointer' }}
-                spacing={{ base: '30px' }}
-                mb={{ base: '10px' }}
-              >
-                <Text fontSize={{ base: 'xs' }}>Reports</Text>
-                <Spacer />
-                <Flex color={'brand.200'} alignItems={{ base: 'flex-end' }}>
-                  <ChevronRightIcon />
-                </Flex>
-              </HStack>
+              {PROFILE_MENU_LIST.map(menu => (
+                <HStack
+                  key={menu.key}
+                  onClick={() => router.push(menu.url)}
+                  style={{ cursor: 'pointer' }}
+                  spacing={{ base: '30px' }}
+                  mb={{ base: '10px' }}
+                >
+                  <Text fontSize={{ base: 'xs' }}>{menu.name}</Text>
+                  <Spacer />
+                  <Flex color={'brand.200'} alignItems={{ base: 'flex-end' }}>
+                    <ChevronRightIcon />
+                  </Flex>
+                </HStack>
+              ))}
             </Box>
           </Stack>
         </Box>

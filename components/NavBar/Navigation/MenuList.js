@@ -9,10 +9,42 @@ import {
 } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import WorkspaceMenuList from './WorkspaceMenuList'
+import { useId } from 'react'
 
 export default function MenuList() {
+  const id = useId()
   const linkColor = useColorModeValue('gray.600', 'gray.200')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
+
+  const MENU_LIST = [
+    {
+      key: `${id}-home`,
+      name: 'Home',
+      url: '/'
+    },
+    {
+      key: `${id}-workspace`,
+      name: 'Workspaces',
+      url: '/workspace',
+      icon: <Icon color={'brand.200'} w={5} h={5} as={ChevronDownIcon} />,
+      children: <WorkspaceMenuList />
+    },
+    {
+      key: `${id}-ticket`,
+      name: 'Current Queue',
+      url: '/ticket'
+    },
+    {
+      key: `${id}-project`,
+      name: 'Projects',
+      url: '/project'
+    },
+    {
+      key: `${id}-report`,
+      name: 'Reports',
+      url: '/report'
+    }
+  ]
 
   return (
     <Flex
@@ -23,76 +55,32 @@ export default function MenuList() {
       borderColor={useColorModeValue('gray.200', 'gray.900')}
     >
       <Stack direction="row" spacing={35}>
-        <Popover m={0} trigger={'hover'} placement={'bottom-start'}>
-          <PopoverTrigger>
-            <Link
-              p={2}
-              href="/"
-              fontSize={'md'}
-              fontWeight={700}
-              color={linkColor}
-              _hover={{
-                textDecoration: 'none',
-                color: linkHoverColor
-              }}
-            >
-              Home
-            </Link>
-          </PopoverTrigger>
-        </Popover>
-        <Popover m={0} trigger={'hover'} placement={'bottom-start'}>
-          <PopoverTrigger m={0}>
-            <Link
-              p={2}
-              href="/workspace"
-              fontSize={'md'}
-              fontWeight={700}
-              color={linkColor}
-              _hover={{
-                textDecoration: 'none',
-                color: linkHoverColor
-              }}
-            >
-              Workspaces
-              <Icon color={'brand.200'} w={5} h={5} as={ChevronDownIcon} />
-            </Link>
-          </PopoverTrigger>
-          <WorkspaceMenuList />
-        </Popover>
-        <Popover m={0} trigger={'hover'} placement={'bottom-start'}>
-          <PopoverTrigger>
-            <Link
-              p={2}
-              href="/ticket"
-              fontSize={'md'}
-              fontWeight={700}
-              color={linkColor}
-              _hover={{
-                textDecoration: 'none',
-                color: linkHoverColor
-              }}
-            >
-              Current Queue
-            </Link>
-          </PopoverTrigger>
-        </Popover>
-        <Popover m={0} trigger={'hover'} placement={'bottom-start'}>
-          <PopoverTrigger>
-            <Link
-              p={2}
-              href="/report"
-              fontSize={'md'}
-              fontWeight={700}
-              color={linkColor}
-              _hover={{
-                textDecoration: 'none',
-                color: linkHoverColor
-              }}
-            >
-              Reports
-            </Link>
-          </PopoverTrigger>
-        </Popover>
+        {MENU_LIST.map(menu => (
+          <Popover
+            key={menu.key}
+            m={0}
+            trigger={'hover'}
+            placement={'bottom-start'}
+          >
+            <PopoverTrigger>
+              <Link
+                p={2}
+                href={menu.url}
+                fontSize={'md'}
+                fontWeight={700}
+                color={linkColor}
+                _hover={{
+                  textDecoration: 'none',
+                  color: linkHoverColor
+                }}
+              >
+                {menu.name}
+                {menu.icon ? menu.icon : null}
+              </Link>
+            </PopoverTrigger>
+            {menu.children ? menu.children : null}
+          </Popover>
+        ))}
       </Stack>
     </Flex>
   )
