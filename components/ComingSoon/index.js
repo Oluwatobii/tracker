@@ -1,27 +1,31 @@
 import { Text, VStack, Heading, Button, Box, Flex } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import UnavailableAnimation from '../assets/animation/404Animation'
+import ComingSoonAnimation from '../../assets/animation/ComingSoonAnimation'
 
-export default function PageNotFound() {
+export default function ComingSoon() {
   return (
     <VStack top="50%" left="50%">
-      <UnavailableAnimation />
+      <ComingSoonAnimation />
       <Text
         color="brand"
         fontSize={{ base: '45px', sm: '45px', md: '55px', lg: '60px' }}
-        textAlign={{ base: 'center', sm: 'center', lg: 'center' }}
+        textAlign={{ base: 'center', sm: 'initial', lg: 'center' }}
       >
-        Oops!
+        COMING SOON!
       </Text>
+      <Heading
+        as="h3"
+        size="lg"
+        textAlign={{ base: 'center', sm: 'initial', lg: 'center' }}
+      >
+        THIS PAGE IS UNDER CONSTRUCTION
+      </Heading>
       <Box maxW="540px">
         <Text
+          textAlign={{ base: 'initial', sm: 'initial', lg: 'center' }}
           fontSize={{ base: 'sm', lg: 'xl' }}
-          textAlign={{
-            base: 'center'
-          }}
         >
-          The Page you are looking for might have been removed, had its name
-          changed or is temporarily unavailable
+          Please check back in with us in the coming months
         </Text>
       </Box>
       <NextLink href="/" passHref>

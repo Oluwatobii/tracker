@@ -49,6 +49,7 @@ export default function RecentlyVisited() {
           {filtered.map(workspace => (
             <Box key={workspace.uuid}>
               <HStack
+                mb={{ base: '15px' }}
                 onClick={() =>
                   handleGoToWorkspace({
                     id: workspace.id,

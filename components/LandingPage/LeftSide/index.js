@@ -1,4 +1,5 @@
-import { Square } from '@chakra-ui/react'
+import { Suspense } from 'react'
+import { Square, Spinner } from '@chakra-ui/react'
 import LandPagePicture from './LandPagePicture'
 
 export default function LeftSide() {
@@ -16,7 +17,11 @@ export default function LeftSide() {
       ml={{ base: '21', sm: '21', md: '36', lg: '230', xl: '0' }}
       alignItems="center"
     >
-      <LandPagePicture />
+      <Suspense
+        fallback={<Spinner color={'brand.200'} size={{ base: 'md' }} />}
+      >
+        <LandPagePicture />
+      </Suspense>
     </Square>
   )
 }

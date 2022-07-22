@@ -15,19 +15,21 @@ import {
 } from '@chakra-ui/react'
 import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
 import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
 import useAuth from '../../../hooks/useAuth'
 import CreateWorkspace from '../../Forms/CreateWorkspace'
 import useWorkspaces from '../../../hooks/useWorkspaces'
+import useUserRoles from '../../../hooks/useUserRoles'
 
 export default function Profile() {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { user } = useAuth()
-  const { data, isLoading } = useWorkspaces()
-  const workspaces = data && data.data ? data.data.workspaces : []
-  const roles = Cookies.get('userRoles')
-  const { workspaces: userWorkspacesRole } = roles ? JSON.parse(roles) : {}
+  const { data: workspaceData, isLoading } = useWorkspaces()
+  const { data: rolesData } = useUserRoles()
+  const workspaces =
+    workspaceData && workspaceData.data ? workspaceData.data.workspaces : []
+  const roles = rolesData && rolesData.data ? rolesData.data.roles : {}
+  const { workspaces: userWorkspacesRole } = roles
   const AUTHORIZED_ROLES = ['Admin', 'Owner', 'Workspace Admin']
   const authorized = workspaces.length
     ? Object.values(userWorkspacesRole || {}).some(role =>

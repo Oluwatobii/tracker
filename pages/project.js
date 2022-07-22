@@ -1,5 +1,5 @@
-import CommingSoon from '../components/ComingSoon'
+import ComingSoon from '../components/ComingSoon'
 
 export default function Projects() {
-  return <CommingSoon />
+  return <ComingSoon />
 }

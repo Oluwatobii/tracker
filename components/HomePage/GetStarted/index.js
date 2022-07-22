@@ -11,8 +11,10 @@ import {
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import CreateWorkspace from '../../Forms/CreateWorkspace'
+import { useRouter } from 'next/router'
 
 export default function GetStarted() {
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -94,7 +96,7 @@ export default function GetStarted() {
                   View all current tasks that are available to you.
                 </Text>
                 <HStack
-                  onClick={() => console.log('explore')}
+                  onClick={() => router.push('/explore')}
                   style={{ cursor: 'pointer' }}
                   color={'brand.200'}
                 >
@@ -122,7 +124,7 @@ export default function GetStarted() {
                   Learn how Tracker can help achieve milestones in your Project.
                 </Text>
                 <HStack
-                  onClick={() => console.log('learn')}
+                  onClick={() => router.push('/learn')}
                   style={{ cursor: 'pointer' }}
                   color={'brand.200'}
                 >

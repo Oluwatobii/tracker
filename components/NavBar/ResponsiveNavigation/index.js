@@ -27,7 +27,7 @@ export default function ResponsiveNavigation({ user }) {
         size="lg"
       >
         <DrawerOverlay />
-        <DrawerContents />
+        <DrawerContents onClose={onClose} />
       </Drawer>
     </HStack>
   ) : null
